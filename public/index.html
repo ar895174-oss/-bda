@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BDA Dashboard - Binary Dependence Analysis</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <h1>🔍 BDA Dashboard</h1>
+      <p>Binary Dependence Analysis - Interactive Visualization</p>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="panel">
+          <h3>📂 Binary File</h3>
+          <div class="form-group">
+            <label>Binary Path</label>
+            <input type="text" id="binaryPath" placeholder="/path/to/binary" class="input">
+          </div>
+
+          <div class="form-group">
+            <label>Sample Time (ms)</label>
+            <input type="number" id="sampleTime" value="300" class="input">
+          </div>
+
+          <div class="form-group">
+            <label>Reference Dependencies</label>
+            <input type="text" id="referenceDep" placeholder="default" class="input">
+          </div>
+
+          <button id="analyzeBtn" class="btn btn-primary">📊 Analyze Binary</button>
+          <button id="infoBtn" class="btn btn-secondary">ℹ️ Get Info</button>
+        </div>
+
+        <div class="panel">
+          <h3>📈 Results</h3>
+          <div id="stats" class="stats">
+            <div class="stat-item">
+              <span>Reference Deps:</span>
+              <strong id="refDeps">-</strong>
+            </div>
+            <div class="stat-item">
+              <span>Missing Deps:</span>
+              <strong id="missingDeps">-</strong>
+            </div>
+            <div class="stat-item">
+              <span>Extra Deps:</span>
+              <strong id="extraDeps">-</strong>
+            </div>
+            <div class="stat-item">
+              <span>Status:</span>
+              <strong id="status">Ready</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>⚙️ Settings</h3>
+          <label>
+            <input type="checkbox" id="showDetails" checked>
+            Show Details
+          </label>
+          <label>
+            <input type="checkbox" id="autoLayout" checked>
+            Auto Layout
+          </label>
+        </div>
+      </aside>
+
+      <!-- Main Visualization Area -->
+      <div class="content">
+        <!-- Tabs -->
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="graph">Dependency Graph</button>
+          <button class="tab-btn" data-tab="table">Data Table</button>
+          <button class="tab-btn" data-tab="logs">Logs</button>
+        </div>
+
+        <!-- Graph Tab -->
+        <div class="tab-content active" id="graph-tab">
+          <div id="network" class="network"></div>
+        </div>
+
+        <!-- Table Tab -->
+        <div class="tab-content" id="table-tab">
+          <div class="table-wrapper">
+            <table id="dataTable" class="data-table">
+              <thead>
+                <tr>
+                  <th>Source</th>
+                  <th>Target</th>
+                  <th>Type</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="tableBody">
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Logs Tab -->
+        <div class="tab-content" id="logs-tab">
+          <div id="logs" class="logs"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
